@@ -15,11 +15,7 @@ const questions = [
   "What can be done to protect people online?",
 ];
 
-const transcripts = [
-  { name: "Mugdha", age: 52, initial: "Mu", gradient: "linear-gradient(135deg, #ff6b6b, #a855f7)", quote: "Sometimes videos online look completely real, especially when many people are sharing them. I don't always know how to verify whether something is fake or AI-generated. A warning system that explains things clearly would make me feel safer online. Many older adults panic during scam situations because everything happens very quickly. If there was a tool that warned me before opening suspicious links, I would definitely use it." },
-  { name: "Mukesh", age: 61, initial: "Mk", gradient: "linear-gradient(135deg, #00d4ff, #10b981)", quote: "Fake banking messages and phishing scams are becoming very convincing now. Most older adults panic during suspicious situations because everything happens too quickly. Simple guidance and warning systems would help a lot. Deepfake videos are dangerous because they look believable. There should be a system that actively protects users before they make mistakes." },
-  { name: "Chaturya", age: 47, initial: "Ch", gradient: "linear-gradient(135deg, #c8ff00, #10b981)", quote: "Modern apps are too cluttered and confusing for many older users. People trust videos because they look realistic. Many fake posts spread quickly because users react emotionally before verifying information. Older adults are more vulnerable because technology changes too fast. Simple interfaces and guided explanations would help users feel more confident online." },
-];
+
 
 const highlightsData = [
   { name: "Shreya", age: 52, initial: "Sh", gradient: "linear-gradient(135deg, #ff6b6b, #a855f7)", quote: "Once, a viral video about a public issue looked completely real, so everyone believed it. Later, we found out parts were edited and taken out of context. Another time, a forwarded message about a new rule spread everywhere, but it also turned out to be fake. These incidents show how easily misinformation spreads online." },
@@ -34,12 +30,7 @@ export default function InterviewsSection() {
 
   const driveLink = "https://drive.google.com/drive/folders/18Z6SRvZrt7O71fDqE5-_tuiqnrvPkD30?usp=drive_link";
 
-  const audioGroups = [
-    { name: "Mugdha's Interview", sub: "1 audio recording · Age 52", desc: "Recorded session with Mugdha focusing on how quickly fake content spreads and her experiences with trying to verify AI-generated content online.", initial: "Mu", color: "#ff6b6b" },
-    { name: "Mukesh's Interview", sub: "1 audio recording · Age 61", desc: "In-depth interview exploring the impact of phishing scams and fake banking messages, and how older adults panic during suspicious situations.", initial: "Mk", color: "#00d4ff" },
-    { name: "Chaturya's Interview", sub: "1 audio recording · Age 47", desc: "Discussion on modern app complexity, emotional reactions to digital threats, and why simple interfaces are needed to build confidence.", initial: "Ch", color: "#c8ff00" },
-    { name: "Full Audio Folder", sub: "All recordings · Google Drive", desc: "Access the complete collection of all interview audio recordings from our field research phase on Google Drive.", initial: "📂", color: "#ec4899", isMain: true }
-  ];
+
 
   return (
     <section id="interviews" className="py-28">
@@ -75,28 +66,6 @@ export default function InterviewsSection() {
         {/* Audio Recordings Content */}
         {tab === "audio" && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-              {audioGroups.map((g, i) => (
-                <div key={g.name} className="card p-6 flex flex-col h-full bg-[#16161f] hover:bg-[#1a1a24] transition-colors border-[#252533]">
-                  <div className="flex gap-4 items-center mb-4">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-[#111] text-sm" style={{ background: g.color }}>
-                      {g.initial}
-                    </div>
-                    <div>
-                      <h4 className="text-white text-[0.95rem] font-semibold">{g.name}</h4>
-                      <p className="text-[#8a8a9a] text-[0.7rem]">{g.sub}</p>
-                    </div>
-                  </div>
-                  <p className="text-[0.8rem] text-[#8a8a9a] mb-6 flex-grow leading-relaxed">
-                    {g.desc}
-                  </p>
-                  <a href={driveLink} target="_blank" rel="noopener noreferrer" className="text-[0.8rem] font-semibold text-[#c8ff00] hover:text-[#e2ff4c] flex items-center gap-2 mt-auto w-fit">
-                    ▶ {g.isMain ? "Open Full Folder" : "Listen on Drive"}
-                  </a>
-                </div>
-              ))}
-            </div>
-
             {/* Drive list mock */}
             <div className="card p-0 overflow-hidden border-[#252533] bg-[#16161f]">
               <div className="flex justify-between items-center p-4 border-b border-[#252533] bg-[#1a1a24]">
@@ -114,7 +83,7 @@ export default function InterviewsSection() {
                     <span className="text-[#8a8a9a] w-40 hidden md:block">Participant #{i+1}</span>
                   </a>
                 ))}
-                <div className="p-4 text-center">
+                <div className="p-4 text-center bg-[#111118]">
                   <a href={driveLink} target="_blank" rel="noopener noreferrer" className="inline-block px-5 py-2 rounded-full bg-[#c8ff00] text-black font-semibold text-[0.8rem] hover:bg-[#e2ff4c] transition-colors">
                     View all recordings on Google Drive
                   </a>
@@ -124,10 +93,40 @@ export default function InterviewsSection() {
           </motion.div>
         )}
 
-        {/* Transcript/Highlights Content */}
-        {tab !== "audio" && (
+        {/* Transcripts Content */}
+        {tab === "questions" && (
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            {/* Drive list mock */}
+            <div className="card p-0 overflow-hidden border-[#252533] bg-[#16161f]">
+              <div className="flex justify-between items-center p-4 border-b border-[#252533] bg-[#1a1a24]">
+                <div className="flex items-center gap-3 text-white font-medium text-[0.9rem]">
+                  📄 Transcripts — Google Drive
+                </div>
+                <div className="text-[0.7rem] text-[#8a8a9a]">Folder: Transcripts</div>
+              </div>
+              <div className="p-0">
+                {["Mugdha", "Mukesh", "Chaturya"].map((name, i) => (
+                  <a key={i} href={driveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 border-b border-[#252533] hover:bg-[rgba(255,255,255,0.02)] transition-colors text-[0.85rem]">
+                    <span className="text-[#8a8a9a]">📄</span>
+                    <span className="text-white font-medium flex-grow">Transcript_{name}.pdf</span>
+                    <span className="text-[#8a8a9a] w-32 hidden sm:block">April 2026</span>
+                    <span className="text-[#8a8a9a] w-40 hidden md:block">Participant #{i+1}</span>
+                  </a>
+                ))}
+                <div className="p-4 text-center bg-[#111118]">
+                  <a href={driveLink} target="_blank" rel="noopener noreferrer" className="inline-block px-5 py-2 rounded-full bg-[#c8ff00] text-black font-semibold text-[0.8rem] hover:bg-[#e2ff4c] transition-colors">
+                    View all transcripts on Google Drive
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Highlights Content */}
+        {tab === "highlights" && (
           <div className="grid md:grid-cols-3 gap-5">
-            {(tab === "highlights" ? highlightsData : transcripts).map((t, i) => (
+            {highlightsData.map((t, i) => (
               <motion.div key={t.name} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.35 + i * 0.1 }} className="card-glow p-7 flex flex-col">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="avatar-gradient w-12 h-12 text-[0.8rem]" style={{ background: t.gradient }}>{t.initial}</div>
@@ -137,11 +136,6 @@ export default function InterviewsSection() {
                   </div>
                 </div>
                 <p className="quote-text text-[0.88rem] flex-grow">&ldquo;{t.quote}&rdquo;</p>
-                {tab === "questions" && (
-                  <a href={driveLink} target="_blank" rel="noopener noreferrer" className="mt-6 text-[0.75rem] font-semibold text-white bg-[rgba(255,255,255,0.05)] hover:bg-[rgba(255,255,255,0.1)] px-4 py-2 rounded-md transition-colors w-fit flex items-center gap-2">
-                    📄 Read Full Transcript on Drive
-                  </a>
-                )}
               </motion.div>
             ))}
           </div>
