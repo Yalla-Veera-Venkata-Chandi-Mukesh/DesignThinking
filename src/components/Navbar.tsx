@@ -39,16 +39,16 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
       className="nav-bar"
     >
-      <div className="container-main flex items-center h-14 gap-6 overflow-x-auto">
+      <div className="container-main flex items-center h-16 gap-16 overflow-x-auto no-scrollbar">
         <a href="#home" className="shrink-0 font-display font-800 text-[0.95rem] tracking-[3px] uppercase" style={{ color: "#c8ff00" }}>
           GROUP 6
         </a>
-        <div className="flex items-center gap-1 shrink-0">
+        <div className="flex items-center gap-6 shrink-0">
           {links.slice(1).map((l) => (
             <a
               key={l.id}
               href={`#${l.id}`}
-              className={`px-3 py-1.5 text-[0.72rem] tracking-[1.5px] uppercase font-medium transition-colors whitespace-nowrap ${
+              className={`py-1.5 text-[0.72rem] tracking-[2px] uppercase font-bold transition-colors whitespace-nowrap ${
                 active === l.id ? "text-white" : "text-[#55555f] hover:text-[#8a8a9a]"
               }`}
             >
