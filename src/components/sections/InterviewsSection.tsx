@@ -21,6 +21,12 @@ const transcripts = [
   { name: "Chaturya", age: 47, initial: "Ch", gradient: "linear-gradient(135deg, #c8ff00, #10b981)", quote: "Modern apps are too cluttered and confusing for many older users. People trust videos because they look realistic. Many fake posts spread quickly because users react emotionally before verifying information. Older adults are more vulnerable because technology changes too fast. Simple interfaces and guided explanations would help users feel more confident online." },
 ];
 
+const highlightsData = [
+  { name: "Shreya", age: 52, initial: "Sh", gradient: "linear-gradient(135deg, #ff6b6b, #a855f7)", quote: "Once, a viral video about a public issue looked completely real, so everyone believed it. Later, we found out parts were edited and taken out of context. Another time, a forwarded message about a new rule spread everywhere, but it also turned out to be fake. These incidents show how easily misinformation spreads online." },
+  { name: "Gathresh", age: 61, initial: "Ga", gradient: "linear-gradient(135deg, #00d4ff, #10b981)", quote: "Better awareness, digital literacy and some stronger platforms of regulations. And also some tools that are able to detect whether the particular content is AI generated or not. That would help." },
+  { name: "Vidhi", age: 47, initial: "Vi", gradient: "linear-gradient(135deg, #c8ff00, #10b981)", quote: "I don't trust everything online anymore. If it sounds too good or too, too bad, I, I tend to double check because there's a lot of misinformation. So I think my trust has gone down drastically. It really puts you on spot." },
+];
+
 export default function InterviewsSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -121,7 +127,7 @@ export default function InterviewsSection() {
         {/* Transcript/Highlights Content */}
         {tab !== "audio" && (
           <div className="grid md:grid-cols-3 gap-5">
-            {transcripts.map((t, i) => (
+            {(tab === "highlights" ? highlightsData : transcripts).map((t, i) => (
               <motion.div key={t.name} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.35 + i * 0.1 }} className="card-glow p-7 flex flex-col">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="avatar-gradient w-12 h-12 text-[0.8rem]" style={{ background: t.gradient }}>{t.initial}</div>
