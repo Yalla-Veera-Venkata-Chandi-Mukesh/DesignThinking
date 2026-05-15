@@ -101,6 +101,20 @@ export default function IdeationSection() {
             </motion.div>
           ))}
         </div>
+
+        {/* Prioritization Matrix Embed */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.5 }} className="mt-20">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-[1.1rem] font-semibold text-white">Value vs Effort Prioritization</h3>
+          </div>
+          <div className="w-full rounded-xl overflow-hidden border border-[#252533] bg-[#0a0a0f]" style={{ height: "1000px" }}>
+            <iframe
+              src="/DesignThinking/matrix.html"
+              className="w-full h-full"
+              frameBorder="0"
+            ></iframe>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
