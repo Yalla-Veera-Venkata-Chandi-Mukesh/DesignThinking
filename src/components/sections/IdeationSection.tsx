@@ -60,23 +60,7 @@ export default function IdeationSection() {
           Solutions prioritized using feasibility, desirability, accessibility impact, and emotional reassurance.
         </motion.p>
 
-        {/* Miro Board Embed */}
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.28 }} className="mb-14">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-[1.1rem] font-semibold text-white">Interactive Miro Board</h3>
-          </div>
-          
-          <div className="w-full h-[600px] rounded-xl overflow-hidden border border-[#252533] bg-[#111118]">
-            <iframe
-              src="https://miro.com/app/live-embed/uXjVHX2MBNU=/?embedMode=view_only_without_ui&moveToViewport=-6940%2C-5315%2C20479%2C9805&embedId=554103504542"
-              className="w-full h-full"
-              frameBorder="0"
-              scrolling="no"
-              allow="fullscreen; clipboard-read; clipboard-write"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </motion.div>
+
 
         <div className="space-y-6">
           {keys.map((k, i) => (
