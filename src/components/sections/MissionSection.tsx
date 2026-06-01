@@ -32,8 +32,8 @@ export default function MissionSection() {
         </motion.div>
 
         {/* HMW Banner */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 }} className="card p-6 mb-14" style={{ borderColor: "rgba(200,255,0,0.1)" }}>
-          <p className="text-[0.92rem]" style={{ color: "#c8ff00" }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 }} className="card p-6 mb-14" style={{ borderColor: "rgba(52,211,153,0.18)" }}>
+          <p className="text-[0.92rem]" style={{ color: "#34D399" }}>
             How might we help older adults quickly identify digital threats so that scam vulnerability decreases and confident, independent digital usage becomes natural?
           </p>
         </motion.div>
@@ -42,7 +42,7 @@ export default function MissionSection() {
         <div className="grid md:grid-cols-2 gap-5">
           {pillars.map((p, i) => (
             <motion.div key={p.title} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 + i * 0.1 }} className="card">
-              <p className="text-[0.68rem] tracking-[3px] uppercase font-semibold mb-4" style={{ color: "#c8ff00" }}>
+              <p className="text-[0.68rem] tracking-[3px] uppercase font-semibold mb-4" style={{ color: "#34D399" }}>
                 {p.icon} {p.title}
               </p>
               <div className="flex flex-wrap gap-2">

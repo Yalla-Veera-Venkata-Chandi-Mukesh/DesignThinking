@@ -41,7 +41,7 @@ export default function CustomCursor() {
     <>
       {/* Outer ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[rgba(0,240,255,0.3)] pointer-events-none z-[9998] mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[rgba(52,211,153,0.4)] pointer-events-none z-[9998] mix-blend-difference"
         animate={{
           x: pos.x - 16,
           y: pos.y - 16,
@@ -56,7 +56,7 @@ export default function CustomCursor() {
       />
       {/* Inner dot */}
       <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#00f0ff] pointer-events-none z-[9998]"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[#34D399] pointer-events-none z-[9998]"
         animate={{
           x: pos.x - 3,
           y: pos.y - 3,

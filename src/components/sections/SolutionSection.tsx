@@ -3,9 +3,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const pillars = [
-  { title: "Pillar 1 — AI Scam Detection Layer", desc: "Every message, call, and link gets a live threat assessment — powered by AI scam pattern recognition, phishing database matching, and deepfake detection. Warnings appear in clear, familiar language before any interaction.", color: "#00d4ff" },
-  { title: "Pillar 2 — Accessibility-First Interface", desc: "Simplified, high-contrast layouts with large fonts, labeled icons, step-by-step navigation, and consistent designs that never change unexpectedly. Built specifically around senior daily routines and common use cases.", color: "#c8ff00" },
-  { title: "Pillar 3 — Emotional Reassurance Engine", desc: "Behavior change requires more than tools — it requires trust. The reassurance engine provides calming guidance during suspicious situations, confirms that mistakes can be fixed, and builds digital confidence over time.", color: "#ff6b35" },
+  { title: "Pillar 1 — AI Scam Detection Layer", desc: "Every message, call, and link gets a live threat assessment — powered by AI scam pattern recognition, phishing databases, and deepfake audio analysis.", gradient: "linear-gradient(135deg, #34D399, #10B981)" },
+  { title: "Pillar 2 — Clear Warning System", desc: "No confusing technical jargon. Simple, color-coded alerts (e.g., Red for 'High Risk — Do Not Click') that interrupt impulsive actions safely.", gradient: "linear-gradient(135deg, #2DD4BF, #059669)" },
+  { title: "Pillar 3 — Family Co-Pilot", desc: "Trusted family members receive silent alerts for high-risk threats, allowing them to step in before money is transferred or data is compromised.", gradient: "linear-gradient(135deg, #10B981, #34D399)" },
+  { title: "Pillar 4 — Gentle Learning", desc: "Instead of boring tutorials, users get bite-sized, in-the-moment explanations about why something was blocked, gradually building their own digital intuition.", gradient: "linear-gradient(135deg, #A7F3D0, #34D399)" }
 ];
 
 const steps = [
@@ -23,92 +24,96 @@ const reflections = [
   { title: "Research Changes Your Solution", text: "We generated 150+ ideas across multiple HMW questions. Without structured research, we would have built a simple fact-check tool. The interview insights, empathy maps, and journey mapping revealed that emotional reassurance and accessibility were equally important." },
 ];
 
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
+
 export default function SolutionSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="solution" className="py-28">
+    <section id="solution" className="py-32">
       <div className="section-divider" />
-      <div ref={ref} className="container-main pt-28">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="section-label">Proposed Solution</motion.div>
-        <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }} className="section-heading">SeniorSafe — Our Final Solution</motion.h2>
-        <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }} className="section-body mb-8">
+      <div ref={ref} className="container-main pt-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ ease }} className="section-label">Proposed Solution</motion.div>
+        <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1, ease }} className="section-heading">SeniorSafe — Our <em>Final Solution</em></motion.h2>
+        <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2, ease }} className="section-body mb-8">
           Synthesizing everything we learned — from 50+ interviews, survey responses, empathy maps, journey mapping, and 150+ brainwriting ideas — we propose SeniorSafe: an accessibility-first digital protection ecosystem that meets seniors where they already are and makes digital safety the path of least resistance.
         </motion.p>
 
         {/* Solution card */}
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3 }} className="card-glow p-8 md:p-10 mb-10" style={{ borderColor: "rgba(200,255,0,0.12)" }}>
-          <h3 className="font-display font-700 text-[1.8rem] text-white mb-2">SeniorSafe</h3>
-          <p className="text-[0.85rem] italic mb-5" style={{ color: "#c8ff00" }}>Protect first. Explain clearly. Build confidence.</p>
-          <p className="text-[0.95rem] text-[#8a8a9a] leading-relaxed">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3, ease }} className="card-glow p-8 md:p-10 mb-10" style={{ borderColor: "rgba(52,211,153,0.18)" }}>
+          <h3 className="text-xl font-semibold text-white mb-2" style={{ fontFamily: "var(--font-serif)" }}>The <span style={{ color: "#34D399" }}>SeniorSafe</span> Shield</h3>
+          <p className="text-[0.85rem] italic mb-5" style={{ color: "#34D399", fontFamily: "var(--font-serif)" }}>Protect first. Explain clearly. Build confidence.</p>
+          <p className="text-[0.92rem] text-[#9CA3AF] leading-relaxed">
             SeniorSafe is an accessibility-first protection ecosystem combining simplified interfaces, AI scam detection, fake call protection, guided explanations, emotional reassurance, and multi-platform safety — all designed specifically for older adults. It scored highest across desirability, usability, and accessibility impact.
           </p>
         </motion.div>
 
-        {/* 3 Pillars */}
-        <div className="grid md:grid-cols-3 gap-5 mb-14">
+        {/* 4 Pillars */}
+        <div className="grid md:grid-cols-2 gap-4 mb-16">
           {pillars.map((p, i) => (
-            <motion.div key={p.title} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 + i * 0.1 }} className="card">
-              <p className="text-[0.72rem] tracking-[2px] uppercase font-bold mb-4" style={{ color: p.color }}>{p.title}</p>
-              <p className="text-[0.88rem] text-[#8a8a9a] leading-relaxed">{p.desc}</p>
+            <motion.div key={p.title} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.4 + i * 0.1, ease }} className="card">
+              <div className="w-12 h-1.5 rounded-full mb-6" style={{ background: p.gradient }} />
+              <h4 className="text-[0.9rem] font-semibold text-white mb-2">{p.title}</h4>
+              <p className="text-[0.85rem] text-[#9CA3AF] leading-relaxed">{p.desc}</p>
             </motion.div>
           ))}
         </div>
 
         {/* 5-Step Flow */}
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.6 }}>
-          <h3 className="font-display font-700 text-[1.3rem] text-white mb-6">How SeniorSafe Works — The 5-Step Flow</h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.6, ease }}>
+          <h3 className="text-[1.3rem] text-white mb-6" style={{ fontFamily: "var(--font-serif)", fontWeight: 600 }}>How SeniorSafe Works — The 5-Step Flow</h3>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
             {steps.map((s, i) => (
-              <motion.div key={s.num} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.7 + i * 0.08 }} className="card text-center py-8">
-                <div className="stat-number text-[2rem] mb-2" style={{ color: "#c8ff00" }}>{s.num}</div>
-                <p className="font-semibold text-white text-[0.9rem] mb-1">{s.title}</p>
-                <p className="text-[0.78rem] text-[#55555f]">{s.desc}</p>
+              <motion.div key={s.num} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.7 + i * 0.08, ease }} className="card text-center py-8">
+                <div className="text-[2rem] mb-2" style={{ color: "#34D399", fontFamily: "var(--font-serif)", fontWeight: 700 }}>{s.num}</div>
+                <p className="font-semibold text-white text-[0.88rem] mb-1">{s.title}</p>
+                <p className="text-[0.75rem] text-[#9CA3AF]">{s.desc}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
         {/* Prototype embed */}
-        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.9 }} className="mt-14">
-          <h3 className="font-display font-700 text-[1.3rem] text-white mb-6">Live Prototype</h3>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.9, ease }} className="mt-16">
+          <h3 className="text-[1.3rem] text-white mb-6" style={{ fontFamily: "var(--font-serif)", fontWeight: 600 }}>Live Prototype</h3>
           <div className="card p-3 md:p-4">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-lg mb-3" style={{ background: "#0a0a0f" }}>
-              <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#ff4444]"/><div className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]"/><div className="w-2.5 h-2.5 rounded-full bg-[#10b981]"/></div>
-              <span className="text-[0.68rem] text-[#55555f] font-mono ml-2">v0-onboarding-ui-prototype-olive.vercel.app</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-lg mb-3" style={{ background: "rgba(255,255,255,0.02)" }}>
+              <div className="flex gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-[#F43F5E]"/><div className="w-2.5 h-2.5 rounded-full bg-[#34D399]"/><div className="w-2.5 h-2.5 rounded-full bg-[#22C55E]"/></div>
+              <span className="text-[0.65rem] text-[#94A3B8] font-mono ml-2">v0-onboarding-ui-prototype-olive.vercel.app</span>
             </div>
             <div className="relative rounded-xl overflow-hidden" style={{ paddingTop: "60%" }}>
               <iframe src="https://v0-onboarding-ui-prototype-olive.vercel.app/" className="absolute inset-0 w-full h-full border-0 rounded-xl" title="SeniorSafe Prototype" loading="lazy" allow="fullscreen"/>
             </div>
           </div>
           <div className="mt-4">
-            <a href="https://v0-onboarding-ui-prototype-olive.vercel.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[0.82rem] font-semibold transition-colors hover:text-white" style={{ color: "#c8ff00" }}>
+            <a href="https://v0-onboarding-ui-prototype-olive.vercel.app/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[0.82rem] font-medium transition-colors hover:text-white" style={{ color: "#34D399" }}>
               ↗ Open Full Prototype
             </a>
           </div>
         </motion.div>
 
         {/* Reflections */}
-        <div className="mt-24">
-          <div className="section-divider mb-20" />
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="section-label">Reflection & Learning</motion.div>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="section-body mb-14">
+        <div className="mt-28">
+          <div className="section-divider mb-24" />
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ ease }} className="section-label">Reflection & Learning</motion.div>
+          <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.05, ease }} className="section-heading">What We <em>Learned</em></motion.h2>
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1, ease }} className="section-body mb-16">
             Design thinking is as much about the journey as the solution. Here is what Group 6 learned — about the problem, about our users, and about ourselves as designers and researchers.
           </motion.p>
-          <div className="grid md:grid-cols-2 gap-5">
+          <div className="grid md:grid-cols-2 gap-4">
             {reflections.map((r, i) => (
-              <motion.div key={r.title} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 + i * 0.08 }} className="card">
-                <h4 className="font-semibold text-white text-[1rem] mb-3">{r.title}</h4>
-                <p className="text-[0.88rem] text-[#8a8a9a] leading-relaxed">{r.text}</p>
+              <motion.div key={r.title} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 + i * 0.08, ease }} className="card">
+                <h4 className="font-medium text-white text-[0.95rem] mb-3" style={{ fontFamily: "var(--font-serif)", fontWeight: 700 }}>{r.title}</h4>
+                <p className="text-[0.85rem] text-[#94A3B8] leading-relaxed">{r.text}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-24 pt-10 border-t border-[rgba(255,255,255,0.04)] text-center">
-          <p className="text-[0.72rem] text-[#55555f] tracking-[2px] uppercase">
+        <div className="mt-28 pt-10 border-t border-[rgba(255,255,255,0.04)] text-center">
+          <p className="text-[0.7rem] text-[#94A3B8] tracking-[2px] uppercase">
             Group 6 · Design Thinking · Mahindra University · 2026
           </p>
         </div>

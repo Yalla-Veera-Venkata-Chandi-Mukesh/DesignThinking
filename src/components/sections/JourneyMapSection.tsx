@@ -10,7 +10,7 @@ const stages = [
     actions: "Scrolls through Facebook, WhatsApp, reads headlines and forwards.",
     thoughts: '"This looks important." "Everyone is sharing this, it must be true."',
     feels: "Curious",
-    feelsColor: "#3b82f6",
+    feelsColor: "#34D399",
     painPoints:
       "Too much information at once. Hard to distinguish real from fake content.",
   },
@@ -21,7 +21,7 @@ const stages = [
     thoughts:
       '"Is this real or fake?" "It has so many shares, probably true."',
     feels: "Confused",
-    feelsColor: "#f59e0b",
+    feelsColor: "#2DD4BF",
     painPoints:
       "No quick verification tool. Misleading headlines and emotional triggers.",
   },
@@ -32,7 +32,7 @@ const stages = [
     thoughts:
       '"What if this is fake and I look foolish?" "I don\'t have time to check."',
     feels: "Anxious",
-    feelsColor: "#ef4444",
+    feelsColor: "#10B981",
     painPoints:
       "Lack of easy fact-checking. Social pressure to share quickly.",
   },
@@ -42,7 +42,7 @@ const stages = [
     actions: "Later realizes the content was false. Feels embarrassed.",
     thoughts: '"I should have checked before sharing."',
     feels: "Regret & Shame",
-    feelsColor: "#ec4899",
+    feelsColor: "#059669",
     painPoints:
       "No accountability system. Hard to track or retract misinformation.",
   },
@@ -52,18 +52,18 @@ const stages = [
     actions: "Becomes more cautious after past experience. Seeks safer tools.",
     thoughts: '"There must be an easier way to check this."',
     feels: "Cautiously aware",
-    feelsColor: "#c8ff00",
+    feelsColor: "#A7F3D0",
     painPoints:
       "Fact-checking still time-consuming. No habit-forming system. Still tempted by convenience.",
   },
 ];
 
 const emotionPoints = [
-  { label: "Browse", score: 2, color: "#3b82f6" },
-  { label: "Encounter", score: 0, color: "#f59e0b" },
-  { label: "Share", score: -3, color: "#ef4444" },
-  { label: "Realize", score: -5, color: "#ec4899" },
-  { label: "Protect", score: 1, color: "#c8ff00" },
+  { label: "Browse", score: 2, color: "#34D399" },
+  { label: "Encounter", score: 0, color: "#2DD4BF" },
+  { label: "Share", score: -3, color: "#10B981" },
+  { label: "Realize", score: -5, color: "#059669" },
+  { label: "Protect", score: 1, color: "#A7F3D0" },
 ];
 
 const opportunities = [
@@ -88,6 +88,8 @@ const opportunities = [
     text: "Encourage habit-building through rewards and verification tools.",
   },
 ];
+
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 /* ─── Emotion Arc SVG ─── */
 function EmotionArc({ inView }: { inView: boolean }) {
@@ -118,9 +120,6 @@ function EmotionArc({ inView }: { inView: boolean }) {
     ...p,
   }));
 
-  // Build path
-  const pathD = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
-
   // Build colored line segments
   const segments = pts.slice(0, -1).map((p, i) => ({
     x1: p.x,
@@ -128,14 +127,14 @@ function EmotionArc({ inView }: { inView: boolean }) {
     x2: pts[i + 1].x,
     y2: pts[i + 1].y,
     color: p.score >= 0 && pts[i + 1].score >= 0
-      ? "#3b82f6"
+      ? "#34D399"
       : p.score < 0 && pts[i + 1].score < 0
-        ? "#ef4444"
+        ? "#10B981"
         : p.score >= 0
-          ? "#f59e0b"
+          ? "#2DD4BF"
           : pts[i + 1].score >= 0
-            ? "#c8ff00"
-            : "#ef4444",
+            ? "#A7F3D0"
+            : "#10B981",
   }));
 
   return (
@@ -151,7 +150,7 @@ function EmotionArc({ inView }: { inView: boolean }) {
         y1={midY}
         x2={dims.w - padX}
         y2={midY}
-        stroke="rgba(255,255,255,0.12)"
+        stroke="rgba(255,255,255,0.08)"
         strokeDasharray="6 4"
         strokeWidth={1}
       />
@@ -165,7 +164,7 @@ function EmotionArc({ inView }: { inView: boolean }) {
           x2={seg.x2}
           y2={seg.y2}
           stroke={seg.color}
-          strokeWidth={2.5}
+          strokeWidth={2}
           strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={inView ? { pathLength: 1, opacity: 1 } : {}}
@@ -182,17 +181,17 @@ function EmotionArc({ inView }: { inView: boolean }) {
           transition={{ delay: 0.5 + i * 0.15, type: "spring", stiffness: 300 }}
         >
           {/* Outer ring */}
-          <circle cx={p.x} cy={p.y} r={8} fill="none" stroke={p.color} strokeWidth={2} opacity={0.4} />
+          <circle cx={p.x} cy={p.y} r={7} fill="none" stroke={p.color} strokeWidth={1.5} opacity={0.4} />
           {/* Filled dot */}
-          <circle cx={p.x} cy={p.y} r={4.5} fill={p.color} />
+          <circle cx={p.x} cy={p.y} r={4} fill={p.color} />
           {/* Score label */}
           <text
             x={p.x}
             y={p.y - 16}
             textAnchor="middle"
             fill={p.color}
-            fontSize={11}
-            fontWeight={700}
+            fontSize={10}
+            fontWeight={600}
             fontFamily="var(--font-mono)"
           >
             {p.score > 0 ? `+${p.score}` : p.score}
@@ -202,7 +201,7 @@ function EmotionArc({ inView }: { inView: boolean }) {
             x={p.x}
             y={dims.h - 4}
             textAnchor="middle"
-            fill="rgba(255,255,255,0.4)"
+            fill="rgba(255,255,255,0.3)"
             fontSize={10}
             fontFamily="var(--font-mono)"
             letterSpacing={1}
@@ -221,13 +220,14 @@ export default function JourneySection() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="journey" className="py-28">
+    <section id="journey" className="py-32">
       <div className="section-divider" />
-      <div ref={ref} className="container-main pt-28">
+      <div ref={ref} className="container-main pt-32">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ ease }}
           className="section-label"
         >
           Experience Mapping
@@ -235,15 +235,15 @@ export default function JourneySection() {
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.1, ease }}
           className="section-heading"
         >
-          User Journey Map
+          User Journey <em>Map</em>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.15, ease }}
           className="section-body mb-3"
         >
           Mapping the emotional and behavioral journey of a senior citizen on
@@ -253,9 +253,9 @@ export default function JourneySection() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.2, ease }}
           style={{
-            fontSize: "0.82rem",
+            fontSize: "0.8rem",
             color: "var(--color-text-muted)",
             marginBottom: 56,
           }}
@@ -269,7 +269,7 @@ export default function JourneySection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.25 }}
+          transition={{ delay: 0.25, ease }}
           className="journey-stages-grid"
         >
           {stages.map((s, i) => (
@@ -277,7 +277,7 @@ export default function JourneySection() {
               key={s.num}
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + i * 0.08 }}
+              transition={{ delay: 0.3 + i * 0.08, ease }}
               className="journey-stage-card"
             >
               {/* Stage header */}
@@ -317,7 +317,7 @@ export default function JourneySection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.7, ease }}
           className="journey-emotion-arc"
         >
           <p className="journey-arc-label">
@@ -332,7 +332,7 @@ export default function JourneySection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.85 }}
+          transition={{ delay: 0.85, ease }}
           className="journey-opportunities"
         >
           <p className="journey-opp-label">Opportunities at Each Pain Point</p>
@@ -342,7 +342,7 @@ export default function JourneySection() {
                 key={o.stage}
                 initial={{ opacity: 0, x: -12 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.9 + o.stage * 0.08 }}
+                transition={{ delay: 0.9 + o.stage * 0.08, ease }}
               >
                 <span className="journey-opp-pin">📌</span>
                 <span>

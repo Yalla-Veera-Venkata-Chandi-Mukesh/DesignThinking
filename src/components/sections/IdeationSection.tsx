@@ -37,7 +37,7 @@ const hmwIdeas: Record<string, string[]> = {
   ],
 };
 
-
+const ease = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function IdeationSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,36 +48,36 @@ export default function IdeationSection() {
 
 
   return (
-    <section id="ideation" className="py-28">
+    <section id="ideation" className="py-32">
       <div className="section-divider" />
-      <div ref={ref} className="container-main pt-28">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} className="section-label">Ideation Phase</motion.div>
-        <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1 }} className="section-heading">Brainwriting Solutions</motion.h2>
-        <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 }} className="section-body mb-6">
+      <div ref={ref} className="container-main pt-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ ease }} className="section-label">Ideation Phase</motion.div>
+        <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.1, ease }} className="section-heading">Brainwriting <em>Solutions</em></motion.h2>
+        <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2, ease }} className="section-body mb-6">
           We collaboratively generated 150+ solution ideas across our HMW questions — producing concrete concepts through structured ideation. Click any question below to explore the six ideas our team generated.
         </motion.p>
-        <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.25 }} className="text-[0.82rem] text-[#55555f] mb-14">
+        <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ delay: 0.25, ease }} className="text-[0.8rem] text-[#9CA3AF] mb-16">
           Solutions prioritized using feasibility, desirability, accessibility impact, and emotional reassurance.
         </motion.p>
 
 
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {keys.map((k, i) => (
-            <motion.div key={k} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3 + i * 0.08 }}>
+            <motion.div key={k} initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.3 + i * 0.08, ease }}>
               <button
                 onClick={() => setOpenIdx(openIdx === i ? -1 : i)}
                 className="w-full text-left card-glow p-7 flex items-center justify-between gap-4"
               >
-                <span className="text-[0.92rem] font-semibold" style={{ color: openIdx === i ? "#c8ff00" : "#c0c0d0" }}>{k}</span>
-                <svg className={`w-5 h-5 shrink-0 transition-transform ${openIdx === i ? "rotate-180" : ""}`} fill="none" stroke={openIdx === i ? "#c8ff00" : "#55555f"} strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                <span className="text-[0.9rem] font-medium" style={{ color: openIdx === i ? "#34D399" : "#9CA3AF" }}>{k}</span>
+                <svg className={`w-4 h-4 shrink-0 transition-transform duration-300 ${openIdx === i ? "rotate-180" : ""}`} fill="none" stroke={openIdx === i ? "#34D399" : "#6B7280"} strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
               </button>
               {openIdx === i && (
                 <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mt-3 pl-4">
                   {hmwIdeas[k].map((idea, j) => (
                     <div key={j} className="card p-5">
-                      <span className="text-[0.7rem] text-[#c8ff00] font-mono font-semibold">Idea {j + 1}</span>
-                      <p className="text-[0.88rem] text-[#8a8a9a] mt-2">{idea}</p>
+                      <span className="text-[0.68rem] text-[#34D399] font-mono font-medium">Idea {j + 1}</span>
+                      <p className="text-[0.85rem] text-[#9CA3AF] mt-2">{idea}</p>
                     </div>
                   ))}
                 </motion.div>
@@ -87,11 +87,11 @@ export default function IdeationSection() {
         </div>
 
         {/* Prioritization Matrix Embed */}
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.5 }} className="mt-20">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.5, ease }} className="mt-20">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-[1.1rem] font-semibold text-white">Value vs Effort Prioritization</h3>
+            <h3 className="text-[1.1rem] font-medium text-white" style={{ fontFamily: "var(--font-serif)" }}>Value vs Effort Prioritization</h3>
           </div>
-          <div className="w-full rounded-xl overflow-hidden border border-[#252533] bg-[#0a0a0f]" style={{ height: "1000px" }}>
+          <div className="w-full rounded-xl overflow-hidden border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]" style={{ height: "1000px" }}>
             <iframe
               src="/DesignThinking/matrix.html"
               className="w-full h-full"
